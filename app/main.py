@@ -5,6 +5,9 @@ class Car:
             clean_mark: int,
             brand: str
     ) -> None:
+        _check_value("comfort_class", comfort_class, 1, 7)
+        _check_value("clean_mark", clean_mark, 1, 10)
+        
         self.comfort_class = comfort_class
         self.clean_mark = clean_mark
         self.brand = brand
@@ -17,6 +20,9 @@ class CarWashStation:
             average_rating: float,
             count_of_ratings: int
     ) -> None:
+        _check_value("distance_from_city_center", distance_from_city_center, 1.0, 10.0)
+        _check_value("average_rating", average_rating, 1.0, 5.0)
+
         self.distance_from_city_center = distance_from_city_center
         self.clean_power = clean_power
         self.average_rating = average_rating
@@ -51,3 +57,15 @@ class CarWashStation:
             1
         )
         self.count_of_ratings += 1
+
+def _check_value(
+        value_name: str,
+        value: int | float, 
+        lower_limit: int | float, 
+        upper_limit: int | float
+) -> None:
+    if not (lower_limit <= value <= upper_limit):
+            raise ValueError(
+                f"{value_name} must be between {lower_limit} and {upper_limit}"
+            )
+    
